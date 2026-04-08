@@ -1,11 +1,11 @@
-const { createContact } = require("../models/contactModel");
-const { sendNotification, sendAutoReply } = require("../utils/mailer");
+import { createContact as createContactModel, getAllContacts as getAllContactsModel, getContact as getContactModel } from "../models/contactModel.js";
+import { sendNotification, sendAutoReply } from "../utils/mailer.js";
 
-const submitContact = async (req, res) => {
+export const submitContact = async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
-    const newContact = await createContact(name, email, message);
+    const newContact = await createContactModel(name, email, message);
 
     // Send both emails
     await sendNotification({ name, email, message });
@@ -19,9 +19,9 @@ const submitContact = async (req, res) => {
   }
 };
 
-const getAllContacts = async (req, res) => {
+export const getAllContacts = async (req, res) => {
     try {
-        const contacts = await getAllContacts();
+        const contacts = await getAllContactsModel();
         res.status(200).json({ success: true, data: contacts });
     } catch (err) {
         console.error(err);
@@ -29,15 +29,12 @@ const getAllContacts = async (req, res) => {
     } 
 };
 
-const getContact = async (req, res) => {
+export const getContact = async (req, res) => {
     try {
-        const contact = await getContact(req.params.id);
+        const contact = await getContactModel(req.params.id);
         res.status(200).json({ success: true, data: contact });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
     } 
 };
-
-module.exports = { submitContact, getAllContacts, getContact };
-

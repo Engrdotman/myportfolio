@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
 console.log("EMAIL_USER:", process.env.EMAIL_USER);
 console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "Loaded ✅" : "Missing ❌");
@@ -19,7 +19,7 @@ transporter.verify((error, success) => {
   }
 });
 
-async function sendNotification({ name, email, message }) {
+export async function sendNotification({ name, email, message }) {
   const mailOptions = {
     from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
     to: process.env.EMAIL_USER,
@@ -34,25 +34,19 @@ Message: ${message}
   return transporter.sendMail(mailOptions);
 }
 
-module.exports = { sendNotification };
-
-
 // Auto-reply to the sender 
-
-async function sendAutoReply(email, name) {
+export async function sendAutoReply(email, name) {
   const mailOptions = {
-    from: `"Hazzan Portfolio" <${process.env.EMAIL_USER}>`,
+    from: `"DT Tech Portfolio" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: "Thanks for contacting me 👋",
     html: `
       <h2>Hello ${name},</h2>
       <p>Thanks for reaching out! I’ve received your message and will get back to you soon.</p>
       <br/>
-      <p>Best regards,<br/>Hazzan</p>
+      <p>Best regards,<br/>DT Tech Solutions</p>
     `,
   };
 
   return transporter.sendMail(mailOptions);
 }
-
-module.exports = { sendNotification, sendAutoReply };

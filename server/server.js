@@ -1,23 +1,36 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-
-dotenv.config();
+import contactRoutes from "./routes/contactRoutes.js";
 
 const app = express();
 
+// ✅ Allow both local + deployed frontend
+const allowedOrigins = [
+  "http://127.0.0.1:5500",
+  "http://localhost:5500",
+  "https://myportfolio-six-iota-51.vercel.app"
+];
+
 app.use(cors({
-  origin: "https://myportfolio-six-iota-51.vercel.app/"
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // allow tools like Postman
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
 }));
 
 app.use(express.json());
 
+// Main contact routes that perform DB and Mailer logic
+app.use("/api", contactRoutes);
+
 app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
-});
-
-app.post("/api/contact", (req, res) => {
-  res.send("Contact endpoint working");
 });
 
 const PORT = process.env.PORT || 5000;
