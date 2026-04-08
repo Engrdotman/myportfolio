@@ -107,7 +107,12 @@ form.addEventListener("submit", async (e) => {
   button.textContent = "Sending...";
 
   try {
-    const res = await fetch("http://localhost:5000/api/contact", {
+    // Automatically use the live backend if we are on Vercel or live, but keep localhost for testing
+    const backendUrl = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
+      ? "http://localhost:5000/api/contact" 
+      : "https://myportfolio-backendready.onrender.com/api/contact";
+
+    const res = await fetch(backendUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
