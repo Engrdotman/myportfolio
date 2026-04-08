@@ -29,6 +29,25 @@ app.use(express.json());
 // Main contact routes that perform DB and Mailer logic
 app.use("/api", contactRoutes);
 
+import pool from "./db/db.js";
+
+app.get("/setup-db", async (req, res) => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS contacts (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        message TEXT NOT NULL
+      );
+    `);
+    res.send("Database table 'contacts' created successfully! ✅ You can now test your form.");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error creating table: " + err.message);
+  }
+});
+
 app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
