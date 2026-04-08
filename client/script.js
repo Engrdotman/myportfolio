@@ -107,10 +107,8 @@ form.addEventListener("submit", async (e) => {
   button.textContent = "Sending...";
 
   try {
-    // Automatically use the live backend if we are on Vercel or live, but keep localhost for testing
-    const backendUrl = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
-      ? "http://localhost:5000/api/contact" 
-      : "https://myportfolio-backendready.onrender.com/api/contact";
+    // Always use the live backend on Render (even when testing frontend locally)
+    const backendUrl = "https://myportfolio-backendready.onrender.com/api/contact";
 
     const res = await fetch(backendUrl, {
       method: "POST",
