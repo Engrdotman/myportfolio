@@ -18,6 +18,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  scroll-padding-top: 80px;
 }
 body {
   font-family: 'playfair Display', serif;
@@ -36,7 +37,7 @@ body::-webkit-scrollbar-track {
 
 /*header */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
   backdrop-filter: blur(12px);
@@ -175,32 +176,32 @@ nav a:hover {
 /* Text styling */
 .hero-content span {
   display: inline-block;
-  color: #dae0e3e1;
+  color: white;
   font-weight: 500;
 }
 .hero-content p {
   margin-top: 10px;
-  color: #dae0e3e1;
+  color: white;
   font-size: 1.0rem;
 }
 
 .hero-content h3 {
   margin-top: 10px;
   font-weight: 400;
-  color: #cedbd7;
+  color: white;
 }
 
 .hero-content h1 {
   font-size: 3rem;
   margin: 10px 0;
-  background: linear-gradient(135deg, #38a6d8, #38bdf8);
+  background: linear-gradient(135deg, #7bf1e9, #38bdf8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .hero-content p {
   margin-top: 15px;
-  color: #ced8e5;
+  color: white;
   line-height: 1.6;
   max-width: 500px;
 }
@@ -235,7 +236,7 @@ nav a:hover {
 
 .btn.secondary {
   border: 1px solid #38bdf8;
-  color: #38bdf8;
+  color: white;
 }
 
 .btn.secondary:hover {
@@ -314,7 +315,7 @@ nav a:hover {
 }
 
 .about-content p {
-  color: #b0c7e8;
+  color: white;
   line-height: 1.7;
 }
 
@@ -349,6 +350,7 @@ nav a:hover {
 .projects h2 {
   font-size: 2rem;
   margin-bottom: 50px;
+  color: white;
 }
 
 /* Grid layout */
@@ -390,7 +392,7 @@ nav a:hover {
 
 .project-card p {
   margin: 0 15px 15px;
-  color: #c0d2eb;
+  color: #ebeff4;
   font-size: 0.95rem;
 }
 
@@ -586,7 +588,7 @@ footer {
 }
 
 .footer-content p {
-  color: #94a3b8;
+  color: #c9d6e8;
   font-size: 0.9rem;
 }
 
@@ -594,7 +596,7 @@ footer {
 .social-links a {
   margin-left: 20px;
   text-decoration: none;
-  color: #94a3b8;
+  color: #c9d6e8;
   position: relative;
   transition: 0.3s;
 }
