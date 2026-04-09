@@ -1,52 +1,27 @@
-import nodemailer from "nodemailer";
+import { Resend } from 'resend';
 
-console.log("EMAIL_USER:", process.env.EMAIL_USER);
-console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "Loaded ✅" : "Missing ❌");
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
-transporter.verify((error, success) => {
-  if (error) {
-    console.log("Transport error:", error);
-  } else {
-    console.log("Gmail mailer ready ✅");
-  }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendNotification({ name, email, message }) {
-  const mailOptions = {
-    from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER,
-    subject: `New Contact from ${name}`,
-    text: `
-Name: ${name}
-Email: ${email}
-Message: ${message}
+  // Free tier requires from address to be 'onboarding@resend.dev'
+  // and allows sending emails ONLY to the email address you signed up to Resend with!
+  return resend.emails.send({
+    from: 'onboarding@resend.dev',
+    to: process.env.EMAIL_USER, // Change this if you signed up to Resend with a different email!
+    subject: `New Contact from ${name} via Portfolio`,
+    html: `
+      <h3>New Contact Message</h3>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Message:</strong></p>
+      <p>${message}</p>
     `,
-  };
-
-  return transporter.sendMail(mailOptions);
+  });
 }
 
-// Auto-reply to the sender 
 export async function sendAutoReply(email, name) {
-  const mailOptions = {
-    from: `"DT Tech Portfolio" <${process.env.EMAIL_USER}>`,
-    to: email,
-    subject: "Thanks for contacting me 👋",
-    html: `
-      <h2>Hello ${name},</h2>
-      <p>Thanks for reaching out! I’ve received your message and will get back to you soon.</p>
-      <br/>
-      <p>Best regards,<br/>DT Tech Solutions</p>
-    `,
-  };
-
-  return transporter.sendMail(mailOptions);
+  console.log(`✅ Because we don't have a custom domain verified, we are skipping the auto-reply to the visitor (${email}). Custom domain verification is required by Resend to email other people.`);
+  
+  // Return dummy success so the API request successfully completes instead of crashing
+  return { success: true };
 }
