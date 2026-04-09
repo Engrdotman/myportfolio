@@ -27,6 +27,7 @@ body {
               #0f172a;
   color: #fbfbfbdd;
   overflow-x: hidden; /* Added to fix mobile menu horizontal scroll */
+  padding-top: 80px;
 }
 body::-webkit-scrollbar {
   width: 8px;
