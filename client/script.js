@@ -134,3 +134,24 @@ form.addEventListener("submit", async (e) => {
 });
 
 // Create a toast container if it doesn't exist
+
+// ----- Scroll Animation Observer -----
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show-section");
+    } else {
+      // Optional: Remove class to animate repeatedly if they scroll back up
+      // entry.target.classList.remove("show-section");
+    }
+  });
+}, {
+  threshold: 0.15 // Triggers when 15% of the section is visible
+});
+
+// Add the hidden class to all sections and observe them
+const allSections = document.querySelectorAll("section");
+allSections.forEach((el) => {
+  el.classList.add("hidden-section");
+  observer.observe(el);
+});

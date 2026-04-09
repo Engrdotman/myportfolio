@@ -17,6 +17,7 @@
 }
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 body {
   font-family: 'playfair Display', serif;
@@ -24,6 +25,7 @@ body {
               radial-gradient(circle at bottom right, #1e293b, transparent 40%),
               #0f172a;
   color: #fbfbfbdd;
+  overflow-x: hidden; /* Added to fix mobile menu horizontal scroll */
 }
 body::-webkit-scrollbar {
   width: 8px;
@@ -616,4 +618,16 @@ footer {
 
 .social-links a:hover::after {
   width: 100%;
+}
+
+/* 🔥 Scroll Animations */
+.hidden-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.show-section {
+  opacity: 1;
+  transform: translateY(0);
 }
