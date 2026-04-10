@@ -4,13 +4,7 @@ const nav = document.querySelector(".nav-links");
 
 toggle.addEventListener("click", () => {
   nav.classList.toggle("active");
-  
-if(nav.classList.contains("active")) {
-    toggle.innerHTML = "&times;"; // Change to 'X' when active
-  } else {
-    toggle.innerHTML = "&#9776;"; // Change back to hamburger when inactive
-  }
-
+  toggle.classList.toggle("active");
 });
 
 // Close menu when link clicked (mobile)
@@ -19,6 +13,7 @@ navLinks.forEach(link => {
   link.addEventListener("click", () => {
     if(nav.classList.contains("active")) {
       nav.classList.remove("active");
+      toggle.classList.remove("active");
     }
   });
 });
