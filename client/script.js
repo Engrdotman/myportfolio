@@ -1,3 +1,29 @@
+// ----- Theme Toggle -----
+const themeToggle = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+const themeLabel = document.getElementById("theme-label");
+const html = document.documentElement;
+
+function applyTheme(theme) {
+  html.setAttribute("data-theme", theme);
+  if (theme === "light") {
+    themeIcon.textContent = "🌙";
+    
+  } else {
+    themeIcon.textContent = "☀️";
+  }
+  localStorage.setItem("theme", theme);
+}
+
+// Load saved preference or default to dark
+const savedTheme = localStorage.getItem("theme") || "dark";
+applyTheme(savedTheme);
+
+themeToggle.addEventListener("click", () => {
+  const current = html.getAttribute("data-theme");
+  applyTheme(current === "dark" ? "light" : "dark");
+});
+
 // ----- Mobile toggle -----
 const toggle = document.getElementById("menu-toggle");
 const nav = document.querySelector(".nav-links");

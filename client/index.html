@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,10 @@
         <a href="index.html"> <img src="image/portfolio-logo.jpeg" alt="Hazzan AdedotunLogo"></a>
         <h2> <i>DT 'Tech</i></h2>
     </div>
-    
+    <button id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+      <span id="theme-icon">☀️</span>
+      <span class="toggle-label" id="theme-label"></span>
+    </button>
     <!-- Mobile menu toggle -->
     <div class="menu-toggle" id="menu-toggle">
         <span class="bar"></span>
@@ -33,6 +36,7 @@
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
+   
   </div>
   
 </header>
@@ -66,7 +70,7 @@
         <img src="image/aboutpic.jfif" alt="Hazzan Adedotun">
 
         <div class="about-text">
-            <h4>Full Stack Developer</h4>
+            <h3>Full Stack Developer</h3>
             <p>
                 I'm a passionate full stack developer with experience in building web applications using React, Python/Django, JavaScript and PostgreSQL. I enjoy creating efficient and user-friendly solutions to complex problems. When I'm not coding, I love exploring new technologies and contributing to open-source projects.
             </p>

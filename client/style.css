@@ -1,13 +1,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* ===== DARK MODE (default) ===== */
 :root {
   --bg: #0f172a;
+  --bg-gradient: radial-gradient(circle at top left, #0ea5e9, transparent 40%),
+                 radial-gradient(circle at bottom right, #1e293b, transparent 40%),
+                 #0f172a;
   --card: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --navbar-bg: rgba(15, 23, 42, 0.6);
+  --navbar-border: rgba(255, 255, 255, 0.08);
+  --mobile-nav-bg: rgba(15, 23, 42, 0.97);
+  --footer-bg: rgba(15, 23, 42, 0.6);
+  --footer-border: rgba(255, 255, 255, 0.08);
   --primary: #0ea5e9;
   --secondary: #38bdf8;
   --text: #f0f3f7;
+  --text-white: #ffffff;
   --muted: #c8d8effa;
-  --webkit-background-clip: text;
-  --webkit-scrollbar-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-color: #e2e8f0;
+  --nav-link-color: #e2e8f0;
+  --footer-link-color: #c9d6e8;
+  --skill-color: #e2e8f0;
+  --toggle-bg: rgba(255,255,255,0.1);
+  --toggle-icon: '☀️';
+}
+
+/* ===== LIGHT MODE ===== */
+[data-theme="light"] {
+  --bg: #f0f6ff;
+  --bg-gradient: radial-gradient(circle at top left, #bae6fd, transparent 40%),
+                 radial-gradient(circle at bottom right, #e0f2fe, transparent 40%),
+                 #f0f6ff;
+  --card: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(14, 165, 233, 0.15);
+  --navbar-bg: rgba(240, 246, 255, 0.85);
+  --navbar-border: rgba(14, 165, 233, 0.15);
+  --mobile-nav-bg: rgba(240, 246, 255, 0.98);
+  --footer-bg: rgba(224, 242, 254, 0.7);
+  --footer-border: rgba(14, 165, 233, 0.15);
+  --primary: #0284c7;
+  --secondary: #075ad7;
+  --text: #0f172a;
+  --text-white: #0f172a;
+  --muted: #334155;
+  --input-border: rgba(14, 165, 233, 0.3);
+  --input-bg: rgba(255, 255, 255, 0.8);
+  --input-color: #0f172a;
+  --nav-link-color: #1e293b;
+  --footer-link-color: #334155;
+  --skill-color: #1e293b;
+  --toggle-bg: rgba(14,165,233,0.1);
+  --toggle-icon: '🌙';
 }
 
 * {
@@ -22,12 +68,11 @@ html {
 }
 body {
   font-family: 'playfair Display', serif;
-  background: radial-gradient(circle at top left, #0ea5e9, transparent 40%),
-              radial-gradient(circle at bottom right, #1e293b, transparent 40%),
-              #0f172a;
-  color: #fbfbfbdd;
-  overflow-x: hidden; /* Added to fix mobile menu horizontal scroll */
+  background: var(--bg-gradient);
+  color: var(--text);
+  overflow-x: hidden;
   padding-top: 80px;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 body::-webkit-scrollbar {
   width: 8px;
@@ -42,9 +87,10 @@ body::-webkit-scrollbar-track {
   top: 0;
   width: 100%;
   backdrop-filter: blur(12px);
-  background: rgba(15, 23, 42, 0.6);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--navbar-bg);
+  border-bottom: 1px solid var(--navbar-border);
   z-index: 1000;
+  transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 .nav-container {
@@ -92,9 +138,39 @@ body::-webkit-scrollbar-track {
 nav a {
   margin-left: 25px;
   text-decoration: none;
-  color: #e2e8f0;
+  color: var(--nav-link-color);
   position: relative;
-  transition: 0.3s;
+  transition: color 0.3s, background 0.4s;
+}
+
+/* ===== Theme Toggle Button ===== */
+#theme-toggle {
+  background: var(--toggle-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 50px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  color: var(--text);
+  white-space: nowrap;
+  margin-left: 18px;
+}
+
+#theme-toggle:hover {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+
+#theme-toggle .toggle-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 /* Hover underline animation */
@@ -128,11 +204,11 @@ nav a:hover {
   right: -100%;
   width: 70%;
   height: 70vh;
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--mobile-nav-bg);
   display: flex;
   flex-direction: column;
   padding: 1.0rem;
-  transition: 0.3s ease;
+  transition: right 0.3s ease, background 0.4s ease;
 }
 
 .nav-links.active {
@@ -195,19 +271,19 @@ nav a:hover {
 /* Text styling */
 .hero-content span {
   display: inline-block;
-  color: white;
+  color: var(--text-white);
   font-weight: 500;
 }
 .hero-content p {
   margin-top: 10px;
-  color: white;
+  color: var(--text-white);
   font-size: 1.0rem;
 }
 
 .hero-content h3 {
   margin-top: 10px;
   font-weight: 400;
-  color: white;
+  color: var(--text-white);
 }
 
 .hero-content h1 {
@@ -220,7 +296,7 @@ nav a:hover {
 
 .hero-content p {
   margin-top: 15px;
-  color: white;
+  color: var(--text-white);
   line-height: 1.6;
   max-width: 500px;
 }
@@ -254,8 +330,8 @@ nav a:hover {
 }
 
 .btn.secondary {
-  border: 1px solid #38bdf8;
-  color: white;
+  border: 1px solid var(--secondary);
+  color: var(--text-white);
 }
 
 .btn.secondary:hover {
@@ -271,11 +347,13 @@ nav a:hover {
   display: block;
   margin: auto;
   border: 4px solid rgba(255, 255, 255, 0.534);
-  transition: 0.3s;
+  transition: 0.8s;
 }
 
 .hero-image img:hover {
-  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3);
+  transform: rotatey(180deg);
+
 }
 
 /* 🔥 Mobile responsiveness */
@@ -328,13 +406,13 @@ nav a:hover {
   margin-bottom: 20px;
 }
 
-.about-content h4 {
+.about-content h3 {
   color: #38bdf8;
   margin-bottom: 10px;
 }
 
 .about-content p {
-  color: white;
+  color: var(--text-white);
   line-height: 1.7;
 }
 
@@ -369,7 +447,7 @@ nav a:hover {
 .projects h2 {
   font-size: 2rem;
   margin-bottom: 50px;
-  color: white;
+  color: var(--text-white);
 }
 
 /* Grid layout */
@@ -381,12 +459,12 @@ nav a:hover {
 
 /* Card */
 .project-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card);
   border-radius: 16px;
   overflow: hidden;
   text-align: left;
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--card-border);
   transition: all 0.3s ease;
 }
 
@@ -394,7 +472,7 @@ nav a:hover {
 .project-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 15px 35px rgba(14, 165, 233, 0.2);
-  border: 1px solid #0ea5e9;
+  border: 1px solid var(--primary);
 }
 
 /* Image */
@@ -411,7 +489,7 @@ nav a:hover {
 
 .project-card p {
   margin: 0 15px 15px;
-  color: #ebeff4;
+  color: var(--muted);
   font-size: 0.95rem;
 }
 
@@ -467,14 +545,14 @@ nav a:hover {
 }
 
 .skills-list li {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card);
   padding: 20px;
   border-radius: 12px;
   backdrop-filter: blur(10px);
-  color: #e2e8f0;
+  color: var(--skill-color);
   font-weight: 500;
   transition: all 0.3s ease;
-  border: 1px solid transparent;
+  border: 1px solid var(--card-border);
 }
 
 /* 🔥 Hover effect */
@@ -487,8 +565,7 @@ nav a:hover {
 /*contact section */
 .contact-content {
   max-width: 600px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin:auto;
   text-align: center;
 }
 .contact-content h2, .skills h2, .projects h2, .about-content h2 {
@@ -511,18 +588,20 @@ nav a:hover {
 
 .contact-info {
   margin-top: 15px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card);
   padding: 25px 30px;
   border-radius: 12px;
   width: 100%;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--card-border);
+  transition: background 0.4s ease;
 }
 
 
 .contact-info p {
   margin: 15px 0;
   font-size: 16px;
-  color: #e2e8f0;
+  color: var(--nav-link-color);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -558,11 +637,12 @@ nav a:hover {
 .contact-content textarea {
   padding: 12px 15px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
-  color: #e2e8f0;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--input-color);
   backdrop-filter: blur(8px);
   resize: none;
+  transition: background 0.4s ease, border-color 0.3s, color 0.4s;
 }
 
 .contact-content textarea {
@@ -593,9 +673,10 @@ nav a:hover {
 footer {
   margin-top: 60px;
   padding: 30px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(15, 23, 42, 0.6);
+  border-top: 1px solid var(--footer-border);
+  background: var(--footer-bg);
   backdrop-filter: blur(10px);
+  transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 .footer-content {
@@ -608,7 +689,7 @@ footer {
 }
 
 .footer-content p {
-  color: #c9d6e8;
+  color: var(--footer-link-color);
   font-size: 0.9rem;
 }
 
@@ -616,7 +697,7 @@ footer {
 .social-links a {
   margin-left: 20px;
   text-decoration: none;
-  color: #c9d6e8;
+  color: var(--footer-link-color);
   position: relative;
   transition: 0.3s;
 }

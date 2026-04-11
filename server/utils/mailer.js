@@ -6,7 +6,7 @@ export async function sendNotification({ name, email, message }) {
   const { data, error } = await resend.emails.send({
     from: 'onboarding@resend.dev',
     to: process.env.EMAIL_USER, // Change this if you signed up to Resend with a different email!
-    subject: `New Contact from ${name} via Portfolio`,
+    subject: `New Contact from ${name} via DT Tech Portfolio`,
     html: `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
         <h3 style="color: #333; border-bottom: 2px solid #007BFF; padding-bottom: 10px;">📫 New Contact Message</h3>
